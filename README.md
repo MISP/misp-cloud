@@ -22,7 +22,7 @@ The images are in sync with the development that happens with the project. We do
 
 ## Deploying the images
 Please select a provider for the instructions on how to deploy:
-* [AWS](https://github.com/0xtf/misp-cloud/wiki/AWS-Installation-Guide)
+* [AWS](https://github.com/misp/misp-cloud/wiki/AWS-Installation-Guide)
 
 ## Credentials & Access
 The following are the credentials that you need to know:
