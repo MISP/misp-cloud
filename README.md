@@ -43,5 +43,5 @@ No other optional features are enabled.
 
 ## ToDo
 - [ ] Improvements on bootstrap script
-- [X] Change bootstrap script for force password change on first login - Should be working as expected. Please report if it doesn't.
+- [X] ~~Change bootstrap script for force password change on first login~~ - Should be working as expected. Please report if it doesn't.
 - [ ] Pipeline integration with main repository
