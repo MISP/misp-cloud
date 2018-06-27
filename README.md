@@ -43,5 +43,5 @@ No other optional features are enabled.
 
 ## ToDo
 - [ ] Improvements on bootstrap script
-- [ ] Improvements on the account creation / first login
+- [ ] Change bootstrap script for force password change on first login
 - [ ] Pipeline integration with main repository
