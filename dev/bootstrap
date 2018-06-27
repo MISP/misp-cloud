@@ -53,7 +53,7 @@ printf "\n"
 printf "\n"
 
 printf " * MISP Project:       https://github.com/MISP/MISP\n"
-printf " * AMI Documentation:  https://github.com/0xtf/misp-cloud\n"
+printf " * AMI Documentation:  https://github.com/misp/misp-cloud\n"
 EOF
 
 sudo cat > /etc/update-motd.d/51-cloudguest <<EOF
