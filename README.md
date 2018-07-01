@@ -1,4 +1,7 @@
 # misp-cloud - Cloud-ready images of MISP
+
+[![Join the chat at https://gitter.im/MISP/misp-cloud](https://badges.gitter.im/MISP/misp-cloud.svg)](https://gitter.im/MISP/misp-cloud?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 The objective of this project is to deliver cloud-ready images of [MISP](https://github.com/MISP/MISP) for testing purposes.
 
 Currently the following providers are supported:
