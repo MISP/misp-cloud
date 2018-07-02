@@ -15,14 +15,6 @@ The image creation process takes into account security updates of the underlayin
 
 We recommend users to read [MISP and Cloud Security](https://github.com/MISP/misp-cloud/wiki/MISP-and-Cloud-Security) for details and best pratices for usage of the platform in cloud environments. 
 
-## Disabled features
-The following features are disabled in this image:
-* E-mail
-  * GnuPG/OpenPGP
-  * S/MIME
-
-If you wish to enable any of these features, please refer to the [MISP installation guide](https://github.com/MISP/MISP/tree/2.4/INSTALL). Following the section for any of the disabled features will work, as the image is built using the same guide.
-
 ## Updates
 The images are in sync with the development that happens with the project. We do not maintain old versions of the images in any of the providers, so it's safe to consider that each provider has an image with the latest version of MISP, and no other, older, version.
 
@@ -42,12 +34,13 @@ If you do want to access the **DB**, both the user that runs the MISP DB as well
 ## Optional Features
 The following are enabled/installed in the image:
 
-* ZeroMQ
-* MISP-modules
+- ZeroMQ
+- MISP modules
+  - [MISP galaxy](https://github.com/MISP/misp-galaxy)
+  - [MISP modules](https://github.com/MISP/misp-modules)
+  - [MISP taxonomies](https://github.com/MISP/misp-taxonomies)
 
 No other optional features are enabled.
 
 ## ToDo
-- [ ] Improvements on bootstrap script
-- [X] ~~Change bootstrap script for force password change on first login~~ - Should be working as expected. Please report if it doesn't.
 - [ ] Pipeline integration with main repository
