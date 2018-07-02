@@ -7,6 +7,7 @@ The objective of this project is to deliver cloud-ready images of [MISP](https:/
 Currently the following providers are supported:
 
 - [x] Amazon Web Services (AWS)
+- [ ] Microsoft Azure
 - [ ] DigitalOcean 
 
 ## Production usage
