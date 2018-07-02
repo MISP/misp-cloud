@@ -1,8 +1,8 @@
-ap-northeast-1:ami-09492afc39353fc69
-eu-central-1:ami-0e7c1580017315112
-eu-west-1:ami-024ee073247e7696b
-eu-west-2:ami-01e78a1f8d6651b52
-eu-west-3:ami-05e8a86fba2f03049
-sa-east-1:ami-0b5887179f807bebe
-us-east-1:ami-06e7e0f623cbfdf7d
-us-west-1:ami-04f23121561e8600e
+ap-northeast-1:ami-091ce00056444727b
+eu-central-1:ami-076bcc32aaf6965bf
+eu-west-1:ami-0d432ad5d4adcb186
+eu-west-2:ami-0f9b586cd0a08260d
+eu-west-3:ami-0c9ee7f9c3538d1a5
+sa-east-1:ami-02a1baa9d2fded14d
+us-east-1:ami-054bf0a17dc591a6f
+us-west-1:ami-09ddb3e093e202878
