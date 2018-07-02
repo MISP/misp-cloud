@@ -13,6 +13,8 @@ Currently the following providers are supported:
 ## Production usage
 The image creation process takes into account security updates of the underlaying Operating System as well of MISP itself, which allows you to use the image in production. That being said, it's highly recommended that you change the credentials associated with MISP, DB and salt that is pre-configured with the images. 
 
+We recommend users to read [MISP and Cloud Security](https://github.com/MISP/misp-cloud/wiki/MISP-and-Cloud-Security) for details and best pratices for usage of the platform in cloud environments. 
+
 ## Disabled features
 The following features are disabled in this image:
 * E-mail
