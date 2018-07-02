@@ -34,8 +34,11 @@ If you do want to access the **DB**, both the user that runs the MISP DB as well
 ## Optional Features
 The following are enabled/installed in the image:
 
-* ZeroMQ
-* MISP-modules
+- ZeroMQ
+- MISP modules
+  - [MISP galaxy](https://github.com/MISP/misp-galaxy)
+  - [MISP modules](https://github.com/MISP/misp-modules)
+  - [MISP taxonomies](https://github.com/MISP/misp-taxonomies)
 
 No other optional features are enabled.
 
