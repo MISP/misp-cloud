@@ -134,18 +134,18 @@ sudo -u www-data git clone https://github.com/STIXProject/python-stix.git
 
 cd $PATH_TO_MISP/app/files/scripts/python-cybox
 sudo -u www-data git checkout v2.1.0.12
-sudo python setup.py install
+sudo python3 setup.py install
 
 cd $PATH_TO_MISP/app/files/scripts/python-stix
 sudo -u www-data git checkout v1.1.1.4
-sudo python setup.py install
+sudo python3 setup.py install
 
 # install mixbox to accomodate the new STIX dependencies:
 cd $PATH_TO_MISP/app/files/scripts/
 sudo -u www-data git clone https://github.com/CybOXProject/mixbox.git
 cd $PATH_TO_MISP/app/files/scripts/mixbox
 sudo -u www-data git checkout v1.0.2
-sudo python setup.py install
+sudo python3 setup.py install
 
 # install STIX2.0 library to support STIX 2.0 export:
 sudo pip3 install stix2
