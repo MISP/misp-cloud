@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Base OS has changed to Ubuntu 18.04
 - Better defaults for MISP configuration
 - MISP 2.4.94
+- Updated development files, "MISP and Cloud Security" and AWS installation guide
 
 ### Removed
 - [Viper](https://github.com/viper-framework/viper) is not included
