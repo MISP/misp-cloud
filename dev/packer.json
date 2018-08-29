@@ -14,13 +14,13 @@
     "source_ami_filter": {
       "filters": {
       "virtualization-type": "hvm",
-      "name": "ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*",
+      "name": "ubuntu/images/*ubuntu-bionic-18.04-amd64-server-*",
       "root-device-type": "ebs"
       },
       "owners": ["099720109477"],
       "most_recent": true
     },
-    "instance_type": "t2.micro",
+    "instance_type": "t2.medium",
     "ami_regions": "{{user `destination_regions`}}",
     "ssh_username": "ubuntu",
     "ami_name": "MISP-{{timestamp}}",
@@ -40,7 +40,7 @@
     {
       "type": "shell",
       "execute_command" : "echo '{{user `ssh_pass`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
-      "script": "/home/ubuntu/misp/bootstrap",
+      "script": "/home/ubuntu/misp/bootstrap-new",
       "pause_before": "10s"
     }
    ],
