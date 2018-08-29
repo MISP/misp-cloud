@@ -39,7 +39,7 @@ The following are enabled/installed in the image:
   - [MISP galaxy](https://github.com/MISP/misp-galaxy)
   - [MISP modules](https://github.com/MISP/misp-modules)
   - [MISP taxonomies](https://github.com/MISP/misp-taxonomies)
-- [MISP Dashboard](https://github.com/MISP/misp-dashboard/) _on port 8001_
 
 ## ToDo
 - [ ] Pipeline integration with main repository
+- [ ] Add MISP-Dashboard
