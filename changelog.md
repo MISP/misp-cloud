@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Base OS has changed to Ubuntu 18.04
 - Better defaults for MISP configuration
+- MISP 2.4.94
 
 ### Removed
 - [Viper](https://github.com/viper-framework/viper) is not included
