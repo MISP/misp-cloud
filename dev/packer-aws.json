@@ -2,7 +2,7 @@
   "variables": {
     "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
     "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
-    "destination_regions": "eu-west-1,eu-west-2,eu-west-3,eu-central-1,us-east-1,us-west-1,ap-northeast-1,sa-east-1",
+    "destination_regions": "eu-west-1,eu-west-2,eu-west-3,eu-central-1,us-east-1,us-west-1,ap-northeast-1,sa-east-1,us-west-2",
     "hostname": "misp"
  },
   "builders": [{
@@ -40,7 +40,7 @@
     {
       "type": "shell",
       "execute_command" : "echo '{{user `ssh_pass`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
-      "script": "/home/ubuntu/misp/bootstrap-new",
+      "script": "/home/ubuntu/misp/bootstrap",
       "pause_before": "10s"
     }
    ],
