@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [N/A] - YYYY-MM-DD
 ### Added
-- Builds in AWS now include the MISP version number in the image description *(see AWS the installation guide for examples)*
+- Builds in AWS now include the MISP version number in the image description *(see the AWS installation guide for examples)*
 
 ### Changed
 - N/A
