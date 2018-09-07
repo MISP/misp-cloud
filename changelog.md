@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - MISP 2.4.95
 - Bootstrap script updated for non-interactive dpkg
-- Additional support for us-west-2 (Fixes #4) 
+- us-west-2 - Additional region added (Fixes Issue [#4](https://github.com/MISP/misp-cloud/issues/4)) 
 
 ### Removed
 - N/A
