@@ -58,7 +58,9 @@ EOF
 
 echo "--- Upgrading base system and autoremoving packages ---"
 sudo apt -qq update > /dev/null 2>&1
-sudo apt upgrade -y # > /dev/null 2>&1 # is this working! fucking apt!
+# Prevent dialog of dpkg for config overwrite
+sudo DEBIAN_FRONTEND=noninteractive apt -yq upgrade > /dev/null 2>&1
+# Clean up
 sudo apt -y autoremove > /dev/null 2>&1
 
 echo "--- Install base packages ---"
