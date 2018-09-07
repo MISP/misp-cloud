@@ -4,17 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [N/A] - YYYY-MM-DD
+## [2.4.95] - 2018-09-7
 ### Added
-- Builds in AWS now include the MISP version number in the image description *(see the AWS installation guide for examples)*
+- Builds in AWS now include the MISP version number in the image description *[(Screenshot)](https://github.com/MISP/misp-cloud/blob/master/docs/images/ami-listing.png)*
 
 ### Changed
-- N/A
+- MISP 2.4.95
+- Bootstrap script updated for non-interactive dpkg
 
 ### Removed
 - N/A
 
-## [N/A] - 2018-09-29
+## [2.4.94] - 2018-09-29
 ### Added
 - GnuPG is enabled by default
 
