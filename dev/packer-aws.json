@@ -1,7 +1,6 @@
 {
   "variables": {
-    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
-    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "profile": "default",
     "destination_regions": "eu-west-1,eu-west-2,eu-west-3,eu-central-1,us-east-1,us-west-1,ap-northeast-1,sa-east-1,us-west-2",
     "hostname": "misp"
  },
