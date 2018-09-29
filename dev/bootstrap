@@ -36,8 +36,8 @@ PHP_INI='/etc/php/7.2/apache2/php.ini'
 echo "--- Process started ... ---"
 
 echo "--- Performing OS changes (branding) ... ---"
-sudo apt-get install -y update-motd > /dev/null 2>&1
-sudo cat > /etc/motd <<EOF
+apt-get install -y update-motd > /dev/null 2>&1
+cat > /etc/motd <<EOF
 
 
              __  __ _____  _____ _____  
@@ -53,35 +53,35 @@ sudo cat > /etc/motd <<EOF
 
 EOF
 
-sudo cat > /etc/update-motd.d/51-cloudguest <<EOF
+cat > /etc/update-motd.d/51-cloudguest <<EOF
 EOF
 
 echo "--- Upgrading base system and autoremoving packages ---"
-sudo apt -qq update > /dev/null 2>&1
+apt -qq update > /dev/null 2>&1
 # Prevent dialog of dpkg for config overwrite
-sudo DEBIAN_FRONTEND=noninteractive apt -yq upgrade > /dev/null 2>&1
+DEBIAN_FRONTEND=noninteractive apt -yq upgrade > /dev/null 2>&1
 # Clean up
-sudo apt -y autoremove > /dev/null 2>&1
+apt -y autoremove > /dev/null 2>&1
 
 echo "--- Install base packages ---"
-sudo apt-get -y install curl net-tools gcc git gnupg-agent make python openssl redis-server sudo tmux vim virtualenvwrapper zip python3-pythonmagick tesseract-ocr htop imagemagick asciidoctor jq > /dev/null 2>&1
+apt-get -y install curl net-tools gcc git gnupg-agent make python openssl redis-server sudo tmux vim virtualenvwrapper zip python3-pythonmagick tesseract-ocr htop imagemagick asciidoctor jq > /dev/null 2>&1
 
 echo "--- Installing and configuring Postfix ---"
 # # Postfix Configuration: Satellite system
 # # change the relay server later with:
-# sudo postconf -e 'relayhost = example.com'
-# sudo postfix reload
-echo "postfix postfix/mailname string `hostname`.misp.local" | sudo debconf-set-selections
-echo "postfix postfix/main_mailer_type string 'Satellite system'" | sudo debconf-set-selections
-sudo apt-get install -y postfix > /dev/null 2>&1
+# postconf -e 'relayhost = example.com'
+# postfix reload
+echo "postfix postfix/mailname string `hostname`.misp.local" | debconf-set-selections
+echo "postfix postfix/main_mailer_type string 'Satellite system'" | debconf-set-selections
+apt-get install -y postfix > /dev/null 2>&1
 
 echo "--- Installing MariaDB specific packages and settings ---"
-sudo apt-get install -y mariadb-client mariadb-server > /dev/null 2>&1
+apt-get install -y mariadb-client mariadb-server > /dev/null 2>&1
 # Secure the MariaDB installation (especially by setting a strong root password)
 sleep 10 # give some time to the DB to launch...
-sudo systemctl restart mariadb.service
+systemctl restart mariadb.service
 sleep 10
-sudo apt-get install -y expect > /dev/null 2>&1
+apt-get install -y expect > /dev/null 2>&1
 ## do we need to spawn mysql_secure_install with sudo in future?
 expect -f - <<-EOF
   set timeout 10
@@ -104,31 +104,31 @@ expect -f - <<-EOF
   send -- "y\r"
   expect eof
 EOF
-sudo apt-get purge -y expect > /dev/null 2>&1
+apt-get purge -y expect > /dev/null 2>&1
 
 echo "--- Installing Apache2 ---"
-sudo apt-get install -y apache2 apache2-doc apache2-utils > /dev/null 2>&1
-sudo a2dismod status > /dev/null 2>&1
-sudo a2enmod ssl > /dev/null 2>&1
-sudo a2enmod rewrite > /dev/null 2>&1
-sudo a2enmod headers > /dev/null 2>&1
-sudo a2dissite 000-default > /dev/null 2>&1
-sudo a2ensite default-ssl > /dev/null 2>&1
+apt-get install -y apache2 apache2-doc apache2-utils > /dev/null 2>&1
+a2dismod status > /dev/null 2>&1
+a2enmod ssl > /dev/null 2>&1
+a2enmod rewrite > /dev/null 2>&1
+a2enmod headers > /dev/null 2>&1
+a2dissite 000-default > /dev/null 2>&1
+a2ensite default-ssl > /dev/null 2>&1
 
 echo "--- Installing PHP-specific packages ---"
-sudo apt-get install -y libapache2-mod-php php php-cli php-dev php-mbstring php-json php-mysql php-opcache php-readline php-redis php-xml > /dev/null 2>&1
+apt-get install -y libapache2-mod-php php php-cli php-dev php-mbstring php-json php-mysql php-opcache php-readline php-redis php-xml > /dev/null 2>&1
 
 echo "--- Configuring PHP ---"
 for key in upload_max_filesize post_max_size max_execution_time max_input_time memory_limit
 do
- sudo sed -i "s/^\($key\).*/\1 = $(eval echo \${$key})/" $PHP_INI
+ sed -i "s/^\($key\).*/\1 = $(eval echo \${$key})/" $PHP_INI
 done
 
 echo "--- Adding Apache virtualhost ---"
 
 openssl req -newkey rsa:4096 -days 365 -nodes -x509 -subj "/CN=MISP-Cloud" -keyout /etc/ssl/private/misp.local.key -out /etc/ssl/private/misp.local.crt > /dev/null 2>&1
 
-sudo cat > /etc/apache2/sites-available/misp-ssl.conf <<EOF
+cat > /etc/apache2/sites-available/misp-ssl.conf <<EOF
 <VirtualHost *:443>
     ServerAdmin admin@misp.local
     ServerName misp.local
@@ -151,88 +151,82 @@ sudo cat > /etc/apache2/sites-available/misp-ssl.conf <<EOF
 </VirtualHost>
 EOF
 
-sudo a2dissite default-ssl > /dev/null 2>&1
-sudo a2ensite misp-ssl > /dev/null 2>&1
+a2dissite default-ssl > /dev/null 2>&1
+a2ensite misp-ssl > /dev/null 2>&1
 
 echo "--- Restarting Apache ---"
-sudo systemctl restart apache2 > /dev/null 2>&1
+systemctl restart apache2 > /dev/null 2>&1
 
 echo "--- Retrieving MISP ---"
 ## Double check perms.
-sudo mkdir $PATH_TO_MISP
-sudo chown www-data:www-data $PATH_TO_MISP
+mkdir $PATH_TO_MISP
+chown www-data:www-data $PATH_TO_MISP
 cd $PATH_TO_MISP
-sudo -u www-data git clone -b $MISP_BRANCH https://github.com/MISP/MISP.git $PATH_TO_MISP > /dev/null 2>&1
+git clone -b $MISP_BRANCH https://github.com/MISP/MISP.git $PATH_TO_MISP > /dev/null 2>&1
 #git checkout tags/$(git describe --tags `git rev-list --tags --max-count=1`)
-sudo -u www-data git config core.filemode false
-# chown -R www-data $PATH_TO_MISP
-# chgrp -R www-data $PATH_TO_MISP
-# chmod -R 700 $PATH_TO_MISP
-
+git config core.filemode false
 
 echo "--- Installing Mitre's STIX ---"
-sudo apt-get install -y python-dev python3-dev python3-pip libxml2-dev libxslt1-dev zlib1g-dev python-setuptools > /dev/null 2>&1
+apt-get install -y python-dev python3-dev python3-pip libxml2-dev libxslt1-dev zlib1g-dev python-setuptools > /dev/null 2>&1
 cd $PATH_TO_MISP/app/files/scripts
-sudo -u www-data git clone https://github.com/CybOXProject/python-cybox.git > /dev/null 2>&1
-sudo -u www-data git clone https://github.com/STIXProject/python-stix.git > /dev/null 2>&1
+git clone https://github.com/CybOXProject/python-cybox.git > /dev/null 2>&1
+git clone https://github.com/STIXProject/python-stix.git > /dev/null 2>&1
 cd $PATH_TO_MISP/app/files/scripts/python-cybox
-sudo python3 setup.py install > /dev/null 2>&1
+python3 setup.py install > /dev/null 2>&1
 cd $PATH_TO_MISP/app/files/scripts/python-stix
-sudo python3 setup.py install > /dev/null 2>&1
+python3 setup.py install > /dev/null 2>&1
 # install mixbox to accomodate the new STIX dependencies:
 cd $PATH_TO_MISP/app/files/scripts/
-sudo -u www-data git clone https://github.com/CybOXProject/mixbox.git > /dev/null 2>&1
+git clone https://github.com/CybOXProject/mixbox.git > /dev/null 2>&1
 cd $PATH_TO_MISP/app/files/scripts/mixbox
-sudo python3 setup.py install > /dev/null 2>&1
+python3 setup.py install > /dev/null 2>&1
 
 echo "--- Retrieving CakePHP ---"
 # CakePHP is included as a submodule of MISP, execute the following commands to let git fetch it:
 cd $PATH_TO_MISP
-sudo -u www-data git submodule init > /dev/null 2>&1
-sudo -u www-data git submodule update > /dev/null 2>&1
+git submodule init > /dev/null 2>&1
+git submodule update > /dev/null 2>&1
 # Once done, install CakeResque along with its dependencies if you intend to use the built in background jobs:
 # Make composer cache happy
 mkdir /var/www/.composer ; chown www-data:www-data /var/www/.composer
 cd $PATH_TO_MISP/app
-sudo -u www-data php composer.phar require kamisama/cake-resque:4.1.2 > /dev/null 2>&1
-sudo -u www-data php composer.phar config vendor-dir Vendor > /dev/null 2>&1
-sudo -u www-data php composer.phar install > /dev/null 2>&1
+php composer.phar require kamisama/cake-resque:4.1.2 > /dev/null 2>&1
+php composer.phar config vendor-dir Vendor > /dev/null 2>&1
+php composer.phar install > /dev/null 2>&1
 # Enable CakeResque with php-redis
-sudo phpenmod redis
+phpenmod redis
 # To use the scheduler worker for scheduled tasks, do the following:
-sudo -u www-data cp -fa $PATH_TO_MISP/INSTALL/setup/config.php $PATH_TO_MISP/app/Plugin/CakeResque/Config/config.php
-
+cp -fa $PATH_TO_MISP/INSTALL/setup/config.php $PATH_TO_MISP/app/Plugin/CakeResque/Config/config.php
 
 echo "--- Setting the permissions ---"
-sudo chown -R www-data:www-data $PATH_TO_MISP
-sudo chmod -R 750 $PATH_TO_MISP
-sudo chmod -R g+ws $PATH_TO_MISP/app/tmp
-sudo chmod -R g+ws $PATH_TO_MISP/app/files
-sudo chmod -R g+ws $PATH_TO_MISP/app/files/scripts/tmp
-
+chown -R www-data:www-data $PATH_TO_MISP
+chmod -R 750 $PATH_TO_MISP
+chmod -R g+ws $PATH_TO_MISP/app/tmp
+chmod -R g+ws $PATH_TO_MISP/app/files
+chmod -R g+ws $PATH_TO_MISP/app/files/scripts/tmp
 
 echo "--- Creating a database user ---"
-sudo mysql -u $DBUSER_ADMIN -p$DBPASSWORD_ADMIN -e "create database $DBNAME;"
-sudo mysql -u $DBUSER_ADMIN -p$DBPASSWORD_ADMIN -e "grant usage on *.* to $DBNAME@localhost identified by '$DBPASSWORD_MISP';"
-sudo mysql -u $DBUSER_ADMIN -p$DBPASSWORD_ADMIN -e "grant all privileges on $DBNAME.* to '$DBUSER_MISP'@'localhost';"
-sudo mysql -u $DBUSER_ADMIN -p$DBPASSWORD_ADMIN -e "flush privileges;"
+mysql -u $DBUSER_ADMIN -p$DBPASSWORD_ADMIN -e "create database $DBNAME;"
+mysql -u $DBUSER_ADMIN -p$DBPASSWORD_ADMIN -e "grant usage on *.* to $DBNAME@localhost identified by '$DBPASSWORD_MISP';"
+mysql -u $DBUSER_ADMIN -p$DBPASSWORD_ADMIN -e "grant all privileges on $DBNAME.* to '$DBUSER_MISP'@'localhost';"
+mysql -u $DBUSER_ADMIN -p$DBPASSWORD_ADMIN -e "flush privileges;"
 # Import the empty MISP database from MYSQL.sql
-sudo -u www-data cat /var/www/MISP/INSTALL/MYSQL.sql | mysql -u $DBUSER_MISP -p$DBPASSWORD_MISP $DBNAME
+cat /var/www/MISP/INSTALL/MYSQL.sql | mysql -u $DBUSER_MISP -p$DBPASSWORD_MISP $DBNAME
 
 echo "--- Restarting Apache ---"
-sudo systemctl restart apache2 > /dev/null 2>&1
+systemctl restart apache2 > /dev/null 2>&1
 
 echo "--- Configuring log rotation ---"
-sudo cp $PATH_TO_MISP/INSTALL/misp.logrotate /etc/logrotate.d/misp
+cp $PATH_TO_MISP/INSTALL/misp.logrotate /etc/logrotate.d/misp
 
 
 echo "--- MISP configuration ---"
 # There are 4 sample configuration files in /var/www/MISP/app/Config that need to be copied
-sudo -u www-data cp -a $PATH_TO_MISP/app/Config/bootstrap.default.php /var/www/MISP/app/Config/bootstrap.php
-sudo -u www-data cp -a $PATH_TO_MISP/app/Config/database.default.php /var/www/MISP/app/Config/database.php
-sudo -u www-data cp -a $PATH_TO_MISP/app/Config/core.default.php /var/www/MISP/app/Config/core.php
-sudo -u www-data cp -a $PATH_TO_MISP/app/Config/config.default.php /var/www/MISP/app/Config/config.php
-sudo -u www-data cat > $PATH_TO_MISP/app/Config/database.php <<EOF
+cp -a $PATH_TO_MISP/app/Config/bootstrap.default.php $PATH_TO_MISP/app/Config/bootstrap.php
+cp -a $PATH_TO_MISP/app/Config/database.default.php /var/www/MISP/app/Config/database.php
+cp -a $PATH_TO_MISP/app/Config/core.default.php /var/www/MISP/app/Config/core.php
+cp -a $PATH_TO_MISP/app/Config/config.default.php /var/www/MISP/app/Config/config.php
+cat > $PATH_TO_MISP/app/Config/database.php <<EOF
 <?php
 class DATABASE_CONFIG {
         public \$default = array(
@@ -251,8 +245,8 @@ class DATABASE_CONFIG {
 }
 EOF
 # and make sure the file permissions are still OK
-sudo chown -R www-data:www-data $PATH_TO_MISP/app/Config
-sudo chmod -R 750 $PATH_TO_MISP/app/Config
+chown -R www-data:www-data $PATH_TO_MISP/app/Config
+chmod -R 750 $PATH_TO_MISP/app/Config
 # Set some MISP directives with the command line tool
 $CAKE Live $MISP_LIVE > /dev/null
 
@@ -443,9 +437,9 @@ $CAKE Admin setSetting "Session.timeout" 600 > /dev/null
 $CAKE Admin setSetting "Session.cookie_timeout" 3600 > /dev/null
 
 echo "--- Generating a GPG encryption key ---"
-sudo apt-get install -y rng-tools haveged > /dev/null 2>&1
+apt-get install -y rng-tools haveged > /dev/null 2>&1
 sudo -u www-data mkdir $PATH_TO_MISP/.gnupg
-sudo chmod 700 $PATH_TO_MISP/.gnupg
+chmod 700 $PATH_TO_MISP/.gnupg
 cat >/tmp/gen-key-script <<EOF
     %echo Generating a default key
     Key-Type: default
@@ -461,18 +455,18 @@ cat >/tmp/gen-key-script <<EOF
     %echo done
 EOF
 sudo -u www-data gpg --homedir $PATH_TO_MISP/.gnupg --batch --gen-key /tmp/gen-key-script
-rm /tmp/gen-key-script
+rm -f /tmp/gen-key-script
 # And export the public key to the webroot
 sudo -u www-data sh -c "gpg --homedir $PATH_TO_MISP/.gnupg --export --armor $GPG_EMAIL_ADDRESS > $PATH_TO_MISP/app/webroot/gpg.asc"
 
 echo "--- Making the background workers start on boot ---"
-sudo chmod 755 $PATH_TO_MISP/app/Console/worker/start.sh
+chmod 755 $PATH_TO_MISP/app/Console/worker/start.sh
 
 # With initd:
 if [ ! -e /etc/rc.local ]
 then
-    echo '#!/bin/sh -e' | sudo tee -a /etc/rc.local
-    echo 'exit 0' | sudo tee -a /etc/rc.local
+    echo '#!/bin/sh -e' | tee -a /etc/rc.local
+    echo 'exit 0' | tee -a /etc/rc.local
     chmod u+x /etc/rc.local
 fi
 
@@ -484,40 +478,40 @@ sed -i -e '$i \sudo -u www-data bash /var/www/MISP/app/Console/worker/start.sh\n
 sed -i -e '$i \sudo -u www-data misp-modules -l 0.0.0.0 -s &\n' /etc/rc.local
 sed -i -e '$i \for d in $git_dirs; do\n' /etc/rc.local
 sed -i -e '$i \    echo "Updating ${d}"\n' /etc/rc.local
-sed -i -e '$i \    cd $d && sudo git pull &\n' /etc/rc.local
+sed -i -e '$i \    cd $d && git pull &\n' /etc/rc.local
 sed -i -e '$i \done\n' /etc/rc.local
 
 echo "--- Installing MISP modules ---"
-sudo apt-get install -y libpq5 libjpeg-dev libfuzzy-dev > /dev/null 2>&1
+apt-get install -y libpq5 libjpeg-dev libfuzzy-dev > /dev/null 2>&1
 cd /usr/local/src/
-sudo git clone https://github.com/MISP/misp-modules.git
+git clone https://github.com/MISP/misp-modules.git
 cd misp-modules
 
 # pip3 install
-sudo pip3 install -I -r REQUIREMENTS > /dev/null 2>&1
-sudo pip3 install -I . > /dev/null 2>&1
-sudo pip3 install lief 2>&1
-sudo pip3 install maec 2>&1
-sudo pip3 install pathlib 2>&1
-sudo pip3 install pymisp python-magic wand yara > /dev/null 2>&1
-sudo pip3 install git+https://github.com/kbandla/pydeep.git > /dev/null 2>&1
+pip3 install -I -r REQUIREMENTS > /dev/null 2>&1
+pip3 install -I . > /dev/null 2>&1
+pip3 install lief 2>&1
+pip3 install maec 2>&1
+pip3 install pathlib 2>&1
+pip3 install pymisp python-magic wand yara > /dev/null 2>&1
+pip3 install git+https://github.com/kbandla/pydeep.git > /dev/null 2>&1
 
 # install STIX2.0 library to support STIX 2.0 export:
-sudo pip3 install stix2 > /dev/null 2>&1
+pip3 install stix2 > /dev/null 2>&1
 
 echo "--- Setting the permissions ... ---"
-sudo chown -R www-data:www-data $PATH_TO_MISP
-sudo chmod -R 750 $PATH_TO_MISP
-sudo chmod -R g+ws $PATH_TO_MISP/app/tmp
-sudo chmod -R g+ws $PATH_TO_MISP/app/files
-sudo chmod -R g+ws $PATH_TO_MISP/app/files/scripts/tmp
+chown -R www-data:www-data $PATH_TO_MISP
+chmod -R 750 $PATH_TO_MISP
+chmod -R g+ws $PATH_TO_MISP/app/tmp
+chmod -R g+ws $PATH_TO_MISP/app/files
+chmod -R g+ws $PATH_TO_MISP/app/files/scripts/tmp
 
 echo "--- Restarting Apache ---"
-sudo systemctl restart apache2 > /dev/null 2>&1
+systemctl restart apache2 > /dev/null 2>&1
 sleep 5
 
 echo "--- Updating the galaxies ---"
-sudo -E $PATH_TO_MISP/app/Console/cake userInit -q > /dev/null
+sudo -u www-data -E $PATH_TO_MISP/app/Console/cake userInit -q > /dev/null
 AUTH_KEY=$(mysql -u $DBUSER_MISP -p$DBPASSWORD_MISP misp -e "SELECT authkey FROM users;" | tail -1)
 # Update the galaxies
 $CAKE Admin updateGalaxies > /dev/null 2>&1
@@ -530,15 +524,15 @@ $CAKE Admin updateTaxonomies > /dev/null 2>&1
 curl --header "Authorization: $AUTH_KEY" --header "Accept: application/json" --header "Content-Type: application/json" -o /dev/null -s -X POST http://127.0.0.1/warninglists/update > /dev/null 2>&1
 
 # Updating the notice lists
-## sudo $CAKE Admin updateNoticeLists
+## $CAKE Admin updateNoticeLists
 curl --header "Authorization: $AUTH_KEY" --header "Accept: application/json" --header "Content-Type: application/json" -o /dev/null -s -X POST http://127.0.0.1/noticelists/update > /dev/null 2>&1
 
 # Updating the object templates
-##sudo $CAKE Admin updateObjectTemplates
+##$CAKE Admin updateObjectTemplates
 curl --header "Authorization: $AUTH_KEY" --header "Accept: application/json" --header "Content-Type: application/json" -o /dev/null -s -X POST http://127.0.0.1/objectTemplates/update > /dev/null 2>&1
 
 echo "--- Enabling MISP new pub/sub feature (ZeroMQ) ---"
-sudo apt-get install -y pkg-config python-redis python-zmq python3-zmq > /dev/null 2>&1
+apt-get install -y pkg-config python-redis python-zmq python3-zmq > /dev/null 2>&1
 
 echo "--- Installing asciidoctor-pdf ---"
 gem install asciidoctor-pdf --pre > /dev/null 2>&1
@@ -549,7 +543,7 @@ cd $PATH_TO_MISP
 sudo -u www-data git submodule foreach --recursive git config core.filemode false > /dev/null 2>&1
 
 echo "--- autoremove for apt ---"
-sudo apt autoremove -y > /dev/null 2>&1
+apt autoremove -y > /dev/null 2>&1
 
 echo "--- Setting Baseurl and making sure Sessions do NOT auto regenerate ---"
 $CAKE Baseurl "" > /dev/null 2>&1

@@ -29,7 +29,7 @@
    "provisioners": [
     {
       "type": "shell",
-      "execute_command" : "{{ .Vars }} sudo -E sh '{{ .Path }}'",
+      "execute_command" : "{{ .Vars }} sudo -H -E sh '{{ .Path }}'",
       "script": "/home/ubuntu/misp/bootstrap",
       "pause_before": "10s"
     }
