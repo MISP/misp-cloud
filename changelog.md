@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.4.96] - 2018-10-9
+### Added
+- N/A
+
+### Changed
+- MISP 2.4.96
+
+### Removed
+- N/A
+
 ## [2.4.95] - 2018-09-7
 ### Added
 - Builds in AWS now include the MISP version number in the image description *[(Screenshot)](https://github.com/MISP/misp-cloud/blob/master/docs/images/ami-listing.png)*
