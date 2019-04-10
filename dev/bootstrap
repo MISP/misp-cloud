@@ -550,3 +550,7 @@ chmod -R g+ws $PATH_TO_MISP/app/tmp
 chmod -R g+ws $PATH_TO_MISP/app/files
 chmod -R g+ws $PATH_TO_MISP/app/files/scripts/tmp
 chmod 700 $PATH_TO_MISP/.gnupg
+
+# Install Crypt_GPG and Console_CommandLine
+sudo pear install ${PATH_TO_MISP}/INSTALL/dependencies/Console_CommandLine/package.xml 2>&1
+sudo pear install ${PATH_TO_MISP}/INSTALL/dependencies/Crypt_GPG/package.xml 2>&1
