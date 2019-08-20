@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [MISP 2.4.113] - 2019-08-20
+### Added
+- N/A
+
+### Changed
+- MISP MISP 2.4.113
+
+### Removed
+- N/A
+
+
 ## [MISP 2.4.111] - 2019-07-23
 ### Added
 - N/A
