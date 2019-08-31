@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [MISP 2.4.114] - 2019-08-31
+### Added
+- N/A
+
+### Changed
+- MISP MISP 2.4.114
+- Fixes [Issue #13](https://github.com/MISP/misp-cloud/issues/13) 
+
+### Removed
+- N/A
+
 ## [MISP 2.4.113] - 2019-08-20
 ### Added
 - N/A
