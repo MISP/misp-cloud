@@ -111,7 +111,7 @@ a2dissite 000-default > /dev/null 2>&1
 a2ensite default-ssl > /dev/null 2>&1
 
 echo "--- Installing PHP-specific packages ---"
-apt-get install -y libapache2-mod-php php php-cli php-dev php-mbstring php-json php-mysql php-opcache php-readline php-redis php-xml > /dev/null 2>&1
+apt install -qy libapache2-mod-php php php-cli php-dev php-json php-xml php-mysql php7.2-opcache php-readline php-mbstring php-redis php-gnupg php-gd > /dev/null 2>&1
 
 echo "--- Configuring PHP ---"
 for key in upload_max_filesize post_max_size max_execution_time max_input_time memory_limit
@@ -156,8 +156,9 @@ echo "--- Retrieving MISP ---"
 mkdir $PATH_TO_MISP
 chown www-data:www-data $PATH_TO_MISP
 cd $PATH_TO_MISP
-git clone -b $MISP_BRANCH https://github.com/MISP/MISP.git $PATH_TO_MISP > /dev/null 2>&1
-#git checkout tags/$(git describe --tags `git rev-list --tags --max-count=1`)
+git clone https://github.com/MISP/MISP.git $PATH_TO_MISP > /dev/null 2>&1
+git submodule update --init --recursive
+git submodule foreach --recursive git config core.filemode false
 git config core.filemode false
 
 echo "--- Installing Mitre's STIX ---"
@@ -187,8 +188,11 @@ cd $PATH_TO_MISP/app
 php composer.phar require kamisama/cake-resque:4.1.2 > /dev/null 2>&1
 php composer.phar config vendor-dir Vendor > /dev/null 2>&1
 php composer.phar install > /dev/null 2>&1
+
 # Enable CakeResque with php-redis
 phpenmod redis
+phpenmod gnupg
+
 # To use the scheduler worker for scheduled tasks, do the following:
 cp -fa $PATH_TO_MISP/INSTALL/setup/config.php $PATH_TO_MISP/app/Plugin/CakeResque/Config/config.php
 
@@ -551,7 +555,3 @@ chmod -R g+ws $PATH_TO_MISP/app/tmp
 chmod -R g+ws $PATH_TO_MISP/app/files
 chmod -R g+ws $PATH_TO_MISP/app/files/scripts/tmp
 chmod 700 $PATH_TO_MISP/.gnupg
-
-# Install Crypt_GPG and Console_CommandLine
-sudo pear install ${PATH_TO_MISP}/INSTALL/dependencies/Console_CommandLine/package.xml 2>&1
-sudo pear install ${PATH_TO_MISP}/INSTALL/dependencies/Crypt_GPG/package.xml 2>&1
