@@ -4,210 +4,94 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [MISP 2.4.118] - 2019-11-18
-### Added
-- N/A
+## [MISP 2.4.119] - 2019-12-05
+### Changed
+- MISP MISP 2.4.119
+- Changelog cleanup
 
+## [MISP 2.4.118] - 2019-11-18
 ### Changed
 - MISP MISP 2.4.118
 
-### Removed
-- N/A
-
 ## [MISP 2.4.117] - 2019-10-21
-### Added
-- N/A
-
 ### Changed
 - MISP MISP 2.4.117
 
-### Removed
-- N/A
-
 ## [MISP 2.4.116] - 2019-09-17
-### Added
-- N/A
-
 ### Changed
 - MISP MISP 2.4.116
 
-### Removed
-- N/A
-
 ## [MISP 2.4.115] - 2019-09-11
-### Added
-- N/A
-
 ### Changed
 - MISP MISP 2.4.115
 
-### Removed
-- N/A
-
 ## [MISP 2.4.114] - 2019-08-31
-### Added
-- N/A
-
 ### Changed
 - MISP MISP 2.4.114
 - Fixes [Issue #13](https://github.com/MISP/misp-cloud/issues/13) 
 
-### Removed
-- N/A
-
 ## [MISP 2.4.113] - 2019-08-20
-### Added
-- N/A
-
 ### Changed
 - MISP MISP 2.4.113
 
-### Removed
-- N/A
-
-
 ## [MISP 2.4.111] - 2019-07-23
-### Added
-- N/A
-
 ### Changed
 - MISP MISP 2.4.111
 
-### Removed
-- N/A
-
 ## [2.4.110] - 2019-07-08
-### Added
-- N/A
-
 ### Changed
 - MISP 2.4.110
 
-### Removed
-- N/A
-
 ## [2.4.109] - 2019-06-14
-### Added
-- N/A
-
 ### Changed
 - MISP 2.4.109
 
-### Removed
-- N/A
-
 ## [2.4.108] - 2019-06-05
-### Added
-- N/A
-
 ### Changed
 - MISP 2.4.108
 
-### Removed
-- N/A
-
 ## [2.4.107] - 2019-05-14
-### Added
-- N/A
-
 ### Changed
 - MISP 2.4.107
 - Fixes [Issue #11](https://github.com/MISP/misp-cloud/issues/11)
 
-### Removed
-- N/A
-
 ## [2.4.106] - 2019-04-26
-### Added
-- N/A
-
 ### Changed
 - MISP 2.4.106
 
-### Removed
-- N/A
-
 ## [2.4.105] - 2019-04-10
-### Added
-- N/A
-
 ### Changed
 - MISP 2.4.105
 - Fixes [Issue #9](https://github.com/MISP/misp-cloud/issues/9)
 
-### Removed
-- N/A
-
 ## [2.4.103] - 2019-03-07
-### Added
-- N/A
-
 ### Changed
 - MISP 2.4.103
 
-### Removed
-- N/A
-
 ## [2.4.102] - 2019-02-03
-### Added
-- N/A
-
 ### Changed
 - MISP 2.4.102
 
-### Removed
-- N/A
-
 ## [2.4.101] - 2019-01-20
-### Added
-- N/A
-
 ### Changed
 - MISP 2.4.101
 
-### Removed
-- N/A
-
 ## [2.4.99] - 2018-12-06
-### Added
-- N/A
-
 ### Changed
 - MISP 2.4.99
 
-### Removed
-- N/A
-
 ## [2.4.98] - 2018-11-27
-### Added
-- N/A
-
 ### Changed
 - MISP 2.4.98
 
-### Removed
-- N/A
-
 ## [2.4.97] - 2018-10-31
-### Added
-- N/A
-
 ### Changed
 - MISP 2.4.97
 - [PR #6](https://github.com/MISP/misp-cloud/pull/6/)
 
-### Removed
-- N/A
-
 ## [2.4.96] - 2018-10-9
-### Added
-- N/A
-
 ### Changed
 - MISP 2.4.96
-
-### Removed
-- N/A
 
 ## [2.4.95] - 2018-09-7
 ### Added
@@ -217,9 +101,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - MISP 2.4.95
 - Bootstrap script updated for non-interactive dpkg
 - us-west-2 - Additional region added (Fixes Issue [#4](https://github.com/MISP/misp-cloud/issues/4)) 
-
-### Removed
-- N/A
 
 ## [2.4.94] - 2018-09-29
 ### Added
