@@ -4,39 +4,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [MISP 2.4.120] - 2020-01-21
+### Changed
+- MISP 2.4.120
+- Changelog typo
+
 ## [MISP 2.4.119] - 2019-12-05
 ### Changed
-- MISP MISP 2.4.119
+- MISP 2.4.119
 - Changelog cleanup
 
 ## [MISP 2.4.118] - 2019-11-18
 ### Changed
-- MISP MISP 2.4.118
+- MISP 2.4.118
 
 ## [MISP 2.4.117] - 2019-10-21
 ### Changed
-- MISP MISP 2.4.117
+- MISP 2.4.117
 
 ## [MISP 2.4.116] - 2019-09-17
 ### Changed
-- MISP MISP 2.4.116
+- MISP 2.4.116
 
 ## [MISP 2.4.115] - 2019-09-11
 ### Changed
-- MISP MISP 2.4.115
+- MISP 2.4.115
 
 ## [MISP 2.4.114] - 2019-08-31
 ### Changed
-- MISP MISP 2.4.114
+- MISP 2.4.114
 - Fixes [Issue #13](https://github.com/MISP/misp-cloud/issues/13) 
 
 ## [MISP 2.4.113] - 2019-08-20
 ### Changed
-- MISP MISP 2.4.113
+- MISP 2.4.113
 
 ## [MISP 2.4.111] - 2019-07-23
 ### Changed
-- MISP MISP 2.4.111
+- MISP 2.4.111
 
 ## [2.4.110] - 2019-07-08
 ### Changed
