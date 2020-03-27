@@ -31,6 +31,8 @@ The following are the credentials that you need to know:
 If you do want to access the **DB**, both the user that runs the MISP DB as well as root, use the following:
 * zgPKzFasIUj1LLGfzfhDVxRLOObzJLer 
 
+The images are built from Ubuntu AMI's, therefor the default username to **SSH** into the instance is `ubuntu`.
+
 ## Optional Features
 The following are enabled/installed in the image:
 
