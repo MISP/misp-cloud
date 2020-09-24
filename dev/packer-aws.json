@@ -6,7 +6,7 @@
  },
   "builders": [{
     "type": "amazon-ebs",
-    "region": "eu-west-1",
+    "region": "eu-central-1",
     "ami_groups": "all",
     "source_ami_filter": {
       "filters": {
