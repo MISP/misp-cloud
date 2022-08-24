@@ -221,9 +221,9 @@ cp $PATH_TO_MISP/INSTALL/misp.logrotate /etc/logrotate.d/misp
 echo "--- MISP configuration ---"
 # There are 4 sample configuration files in /var/www/MISP/app/Config that need to be copied
 cp -a $PATH_TO_MISP/app/Config/bootstrap.default.php $PATH_TO_MISP/app/Config/bootstrap.php
-cp -a $PATH_TO_MISP/app/Config/database.default.php /var/www/MISP/app/Config/database.php
-cp -a $PATH_TO_MISP/app/Config/core.default.php /var/www/MISP/app/Config/core.php
-cp -a $PATH_TO_MISP/app/Config/config.default.php /var/www/MISP/app/Config/config.php
+cp -a $PATH_TO_MISP/app/Config/database.default.php $PATH_TO_MISP/app/Config/database.php
+cp -a $PATH_TO_MISP/app/Config/core.default.php $PATH_TO_MISP/app/Config/core.php
+cp -a $PATH_TO_MISP/app/Config/config.default.php $PATH_TO_MISP/app/Config/config.php
 cat > $PATH_TO_MISP/app/Config/database.php <<EOF
 <?php
 class DATABASE_CONFIG {
