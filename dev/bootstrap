@@ -205,7 +205,7 @@ chmod -R g+ws $PATH_TO_MISP/app/files/scripts/tmp
 
 echo "--- Creating a database user ---"
 mysql -u $DBUSER_ADMIN -p$DBPASSWORD_ADMIN -e "create database $DBNAME;"
-mysql -u $DBUSER_ADMIN -p$DBPASSWORD_ADMIN -e "grant usage on *.* to $DBNAME@localhost identified by '$DBPASSWORD_MISP';"
+mysql -u $DBUSER_ADMIN -p$DBPASSWORD_ADMIN -e "grant usage on *.* to $DBUSER_MISP@localhost identified by '$DBPASSWORD_MISP';"
 mysql -u $DBUSER_ADMIN -p$DBPASSWORD_ADMIN -e "grant all privileges on $DBNAME.* to '$DBUSER_MISP'@'localhost';"
 mysql -u $DBUSER_ADMIN -p$DBPASSWORD_ADMIN -e "flush privileges;"
 # Import the empty MISP database from MYSQL.sql
